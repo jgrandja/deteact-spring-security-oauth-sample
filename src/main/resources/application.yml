@@ -1,0 +1,33 @@
+server:
+  port: 8080
+  url: http://localhost:${server.port}
+
+logging:
+  level:
+    root: WARN
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.springframework.security.oauth2: INFO
+
+spring:
+  thymeleaf:
+    cache: false
+
+security:
+  oauth2:
+    client:
+      client1:
+        client-id: client-1234
+        client-secret: secret
+        user-authorization-uri: ${server.url}/oauth/authorize
+        access-token-uri: ${server.url}/oauth/token
+        scope: read
+        pre-established-redirect-uri: ${server.url}/callback
+#        pre-established-redirect-uri: ${server.url}/callback/%252e%252e
+#        pre-established-redirect-uri: http://deteact.com%ff@localhost:8080/callback/%252e%252e
+        use-current-uri: false
+    resource:
+      filter-order: 3
+
+oauth2-resource1:
+    base-uri: ${server.url}/oauth2/resource1
